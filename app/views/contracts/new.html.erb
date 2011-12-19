@@ -1,0 +1,42 @@
+<div class="contract">
+  <form action="/contracts" method="POST">
+    <input type="hidden" name="slaw_id" value="<%= @slaw_j["uuid"] %>">
+  <h2><input type="title" name="title" value="<%= @slaw_j["name"] %>" style="width: 786px; padding: 5px; font-size: 28px; font-weight: bold; font-family: 'Myriad Pro';"></h2>
+  <div id="body"><%= @slaw %></div>
+  <div style="margin-bottom: 20px; border-top: 1px solid #ddd; margin-top: 20px; padding-top: 20px;"><b>My e-mail address:</b>&nbsp;&nbsp;<input type="email" name="email" placeholder="john-smith@example.com" style="width: 250px; padding: 5px; font-size: 18px" value="<%= @email %>"></div>
+  <input type="submit" value="Create <%= @slaw_j["name"] %>" disabled="disabled" class="major_button">
+  </form>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $("span.html_var").each(function(){
+    name = $(this).attr("data-variable-name")
+    $(this).html("<input type='text' name='responses["+name+"]' placeholder='"+title_case(name.replace(/_/g, " "))+"'>")
+  })
+  $("input[type='text']")[0].focus()
+  
+  function title_case(name) {
+    return name.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+        return letter.toUpperCase();
+    });
+  }
+  
+  $(".contract input[type='text']").change(function(){
+    val = $(this).val()
+    name = $(this).attr("name")
+    $(".contract input[name='"+name+"']").val(val)
+  })
+  
+  $(".contract input[type='text'], .contract input[type='email']").change(function(){
+    enable_form = true;
+    $(".contract input[type='text'], .contract input[type='email']").each(function() {
+      if($(this).val() == "") {
+        enable_form = false
+      }
+    })
+    if(enable_form) {
+      $(".contract input[type='submit']").removeAttr("disabled")
+    } else {
+      $(".contract input[type='submit']").attr("disabled", "disabled")
+    }
+  })
+</script>

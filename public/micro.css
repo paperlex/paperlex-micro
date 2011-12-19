@@ -1,0 +1,69 @@
+body {
+  margin: 40px 0;
+  padding: 0;
+  font-family: Helvetica;
+  font-size: 22px;
+}
+h1, h2 {
+  font-family: "Myriad Pro";
+  margin: 0;
+}
+#content {
+  width: 800px;
+  margin: 0 auto;
+}
+#header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+#header small {
+  display: inline-block;
+  background: #ff9;
+  padding: 2px 4px;
+}
+#footer {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+}
+#footer a {
+  color: #444;
+}
+.contract {
+  line-height: 1.4em;
+}
+.contract #body {
+  text-align: justify;
+}
+.contract input[type='text'] {
+  font-size: 18px;
+}
+.contract input.major_button {
+  width: 800px;
+  font-size: 28px;
+  padding: 15px 0;
+  color: white;
+  font-weight: bold;
+  border: none;
+  background: green;
+  font-family: "Myriad Pro";
+  -webkit-border-radius: 20px;
+  text-shadow: 1px 1px 1px darkgreen;
+}
+.contract input[disabled] {
+  background-color: #ddd;
+  color: #aaa;
+  text-shadow: 1px 1px 1px white;
+}
+input[type='email'] {
+  font-size: 14px;
+}
+input[type="submit"] {
+  font-size: 18px;
+  font-weight: bold;
+}

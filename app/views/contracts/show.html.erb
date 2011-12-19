@@ -1,0 +1,15 @@
+<div class="contract">
+  <div id="sidecar" style="border-bottom: 1px solid #ddd; margin-bottom: 20px; padding-bottom: 20px;">
+    <% if @contract.signed? %>
+      This contract was signed on <b><%= @contract.signatures.last.created_at.strftime("%b %e, %Y") %></b> by <b><%= @contract.email_1 %></b> and <b><%= @contract.email_2 %></b>.
+    <% else %>
+      <% if @contract.signed_by?(@email) and @contract.email_2.present? %>
+      Waiting for the contract to be signed by the other party&hellip;
+      <% else %>
+      <b>Next steps:</b> <% unless @contract.signed_by?(@email) %><a href="/contracts/<%= @contract.uuid %>/sign" style="color: blue" target="_blank">Sign this contract</a><% end %><% if @contract.email_2.blank? %><% unless @contract.signed_by?(@email) %> &mdash;or&mdash; <% end %><form action="/contracts/<%= @contract.uuid %>/invite" method="post" style="display: inline"><input type="email" name="email" placeholder="mg@example.com"> <input type="submit" value="Invite the other signer"></form><% end %><% if flash[:success].present? %><div style="margin-top: 5px"><span style="color: green">(<%= flash[:success] %>)</span></div><% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <h2><%= @contract.title %></h2>
+  <div id="body"><%= @contract.body.html_safe %></div>
+</div>
