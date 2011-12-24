@@ -17,7 +17,7 @@ class ContractsController < ApplicationController
   end
   
   def show
-    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (email_1 = ? OR email_2 = ?)", params[:id], @email, @email])
+    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (LOWER(email_1) = ? OR LOWER(email_2) = ?)", params[:id], @email, @email])
     
     if @contract.blank?
       return render(:action => :simple_auth)
@@ -40,20 +40,20 @@ class ContractsController < ApplicationController
   end
   
   def sign
-    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (email_1 = ? OR email_2 = ?)", params[:id], @email, @email])
+    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (LOWER(email_1) = ? OR LOWER(email_2) = ?)", params[:id], @email, @email])
 
     if @contract.blank?
       return render(:action => :simple_auth)
     end
 
-    review_session_uuid = (@email == @contract.email_1 ? @contract.review_session_1 : @contract.review_session_2)
+    review_session_uuid = (@email == @contract.email_1.downcase ? @contract.review_session_1 : @contract.review_session_2)
     review_session = Paperlex::Contract.find(@contract.uuid).update_review_session(review_session_uuid, {:expires_in => 24.hours})
 
     redirect_to review_session.url
   end
   
   def invite
-    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (email_1 = ? OR email_2 = ?)", params[:id], @email, @email])
+    @contract = Contract.find(:first, :conditions => ["uuid = ? AND (LOWER(email_1) = ? OR LOWER(email_2) = ?)", params[:id], @email, @email])
     if params[:email] == @contract.email_1 or params[:email].blank?
       return redirect_to(contract_url(@contract.uuid))
     end
@@ -79,7 +79,7 @@ class ContractsController < ApplicationController
   private
   
   def set_email
-    @email = session[:email]
+    @email = session[:email].downcase rescue nil
   end
   
 end
