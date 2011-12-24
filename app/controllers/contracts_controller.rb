@@ -28,7 +28,8 @@ class ContractsController < ApplicationController
     contract = Paperlex::Contract.create({:subject => params[:title], :number_of_signers => 2, :responses => params[:responses], :signature_callback_url => "#{CALLBACK_URL}/signature", :slaw_id => params[:slaw_id]})
     signer = contract.create_signer(:email => params[:email])
     review_session = contract.create_review_session(:email => params[:email])
-    html_body = contract.to_html
+    # html_body = contract.to_html
+    html_body = RestClient.get("#{Paperlex.base_url}/contracts/#{contract.uuid}.html?#{{:token => Paperlex.token}.to_query}")
     
     c = Contract.create(:email_1 => params[:email], :uuid => contract.uuid, :responses => params[:responses], :review_session_1 => review_session.uuid, :signer_1 => signer.uuid, :slaw_uuid => params[:slaw_id], :body => html_body, :title => params[:title])
 

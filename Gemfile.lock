@@ -58,7 +58,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.4)
-    paperlex (0.9.2)
+    paperlex (0.9.1)
       activesupport (>= 3.0.0)
       configatron
       hashie
@@ -128,7 +128,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   jquery-rails
   json
-  paperlex (~> 0.9.2)
+  paperlex (= 0.9.1)
   pg
   rails (= 3.1.1)
   rest-client
