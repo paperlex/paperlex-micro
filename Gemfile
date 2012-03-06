@@ -7,7 +7,7 @@ gem 'rails', '3.1.1'
 
 gem 'json'
 
-gem "paperlex", "0.9.1", :require => 'paperlex'
+gem "paperlex", "0.9.4", :require => 'paperlex'
 
 gem 'rest-client', :require => 'rest_client'
 
