@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Paperlex Micro</title>
+  <title>Paperlex Micro<% if @page_title.present? %> - <%= @page_title %><% end %></title>
   <link rel="stylesheet" type="text/css" href="/micro.css" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
 </head>
