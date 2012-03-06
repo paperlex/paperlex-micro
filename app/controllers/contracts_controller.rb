@@ -12,8 +12,8 @@ class ContractsController < ApplicationController
   end
   
   def new
-    @slaw_j = Paperlex::Slaw.find(params[:id])
-    @slaw = RestClient.get("#{Paperlex.base_url}/slaws/#{params[:id]}.html?#{{:token => Paperlex.token, :enhanced => true}.to_query}").html_safe
+    @slaw_j = Paperlex::Slaw.find(params[:id].split("-").last)
+    @slaw = RestClient.get("#{Paperlex.base_url}/slaws/#{params[:id].split("-").last}.html?#{{:token => Paperlex.token, :enhanced => true}.to_query}").html_safe
   end
   
   def show

@@ -1,6 +1,6 @@
 <% if flash[:thanks].present? %><span style="color: green; font-weight: bold"><%= flash[:thanks] %></span><% end %>
 <ul style="list-style: none">
 <% for slaw in @slaws %>
-<li style="margin-bottom: 20px"><b style="display: block"><a href="/contracts/new?id=<%= slaw["uuid"] %>" style="color: blue"><%= slaw["name"] %>:</a></b><span style="color: #444"><%= slaw["description"] %></span></li>
+<li style="margin-bottom: 20px"><b style="display: block"><a href="/contracts/new/<%= slaw["name"].parameterize %>-<%= slaw["uuid"] %>" style="color: blue"><%= slaw["name"] %>:</a></b><span style="color: #444"><%= slaw["description"] %></span></li>
 <% end %>
 </ul>
